@@ -6,7 +6,7 @@ function changeEmail() {
     if (newEmailValue.length > 0 && regexAtSign.test(newEmailValue) && regexDot.test(newEmailValue)) {
         emailTag.innerText = newEmailValue;
     } else {
-        alert("E-mail inválido");
+        alert("E-mail inválido!");
     }
 }
 
