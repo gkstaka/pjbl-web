@@ -6,9 +6,16 @@ function verifyEmail(email){
     return emailRegex.test(email)
 }
 
+function verifyPassword(password) { 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-=+_{}\[\]|;:.,<>?/])[A-Za-z\d!@#$%^&*()\-=+_{}\[\]|;:.,<>?/]{8,}$/;
+
+}
+
 submitButton.onclick = function(){
     let email = document.getElementById("email").value
     if (!verifyEmail(email)){
         alert("E-mail invalido")
     }
+    
+    
 }
