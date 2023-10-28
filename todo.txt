@@ -1,0 +1,2 @@
+1) Regex para senha
+2) Regex para validação login email/user (se tem @ ou não)

@@ -8,8 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Gerenciador de tarefas</title>
-        <link rel="stylesheet" href="assets/css/styles.css" />
-        <link rel="stylesheet" href="assets/css/create-account.css" />
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/create-account.css" />
     </head>
     <header>
         <h1>Gerenciador de tarefas</h1>
@@ -25,6 +25,9 @@
             <span>E-mail: </span>
             <input type="email" name="email" id="email" placeholder="seu.email@aqui.com">
             <br>
+            <span>Usuário: </span>
+            <input type="text" name="username" id="username">
+            <br>
             <span>Senha: </span>
             <input type="password" name="password" id="password">
             <br>
@@ -33,7 +36,6 @@
             <button type="submit" id="submit">Cadastrar</button>
         </form>
         <?php
-            if(isset($_POST[]))
         ?>
     </body>
     <footer>&copy; 2023 Gerenciador de Tarefas</footer>
