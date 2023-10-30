@@ -1,3 +1,7 @@
+<?php
+include_once "connection.php"
+    ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -25,40 +29,64 @@
         <main>
             <section class="add-task">
                 <h2>Adicionar Nova Tarefa</h2>
-                <!-- <form id="add-task-form"> -->
-                <div id="add-task-form">
-                    <div class="form-group">
-                        <label for="task-name">Nome da Tarefa:</label>
-                        <input type="text" id="task-name" name="task-name" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="due-date">Data de Vencimento:</label>
-                        <input type="date" id="due-date" name="due-date" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="priority">Prioridade:</label>
-                        <div class="radio-button-priority">
-                            <div class="radio-button-box">
-                                <input type="radio" name="priority" id="priority-low" value="low" />
-                                <label for="priority-low">Baixa</label>
+
+                <form action="add-task.php" method="post" name="add-task">
+                    <div id="add-task-form">
+                        <div class="form-group">
+                            <label for="task-name">Nome da Tarefa:</label>
+                            <input type="text" id="task-name" name="task-name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="due-date">Data de Vencimento:</label>
+                            <input type="date" id="due-date" name="due-date" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="priority">Prioridade:</label>
+                            <div class="radio-button-priority">
+                                <div class="radio-button-box">
+                                    <input type="radio" name="priority" id="priority-low" value="1" />
+                                    <label for="priority-low">Baixa</label>
+                                </div>
+                                <div class="radio-button-box">
+                                    <input type="radio" name="priority" id="priority-medium" value="2" />
+                                    <label for="priority-medium">Média</label>
+                                </div>
+                                <div class="radio-button-box">
+                                    <input type="radio" name="priority" id="priority=high" value="3" />
+                                    <label for="priority-high">Alta</label>
+                                </div>
                             </div>
-                            <div class="radio-button-box">
-                                <input type="radio" name="priority" id="priority-medium" value="medium" />
-                                <label for="priority-medium">Média</label>
-                            </div>
-                            <div class="radio-button-box">
-                                <input type="radio" name="priority" id="priority=high" value="high" />
-                                <label for="priority-high">Alta</label>
+                            <div class="form-group">
+                                <label for="description">Descrição:</label>
+                                <textarea id="description" name="description" rows="4"></textarea>
                             </div>
                         </div>
+                        <!-- <button onclick="addTask()">Adicionar Tarefa</button> -->
+                        <input type="submit" value="Adicionar Tarefa">
                     </div>
-                    <div class="form-group">
-                        <label for="description">Descrição:</label>
-                        <textarea id="description" name="description" rows="4"></textarea>
-                    </div>
-                    <button onclick="addTask()">Adicionar Tarefa</button>
-                </div>
-                <!-- </form> -->
+                </form>
+
+                <?php
+                if (isset($_POST["add-task"])) {
+                    $user_id = $_GET["id"];
+                    $task_name = $_POST["task-name"];
+                    $due_date = $_POST["due-date"];
+                    $priority = (int)$_POST["priority"];
+                    $description = $_POST["description"];
+                    $status = false;
+                    $sql = "INSERT INTO task(user_id, title, due_date, priority, `description`, `status`)
+                    VALUES (NULL, $task_name, $due_date, $priority, $description, $status);";
+
+                    if (mysqli_query($connection, $sql)) {
+                        echo "<p>Tarefa adicionada</p>";
+                    } else {
+                        echo "<p>Erro ao adicionar tarefa</p>";
+                    }
+
+                }
+
+                ?>
+
             </section>
             <section id="added-task">
                 <!-- created tasks will be displayed here after submitting -->
@@ -66,7 +94,6 @@
         </main>
         <footer>&copy; 2023 Gerenciador de Tarefas</footer>
 
-        <script src="assets/js/add-task.js"></script>
-        <script src="assets/js/header-template-tasks.js"></script>
+        <script src="js/add-task.js"></script>
     </body>
 </html>

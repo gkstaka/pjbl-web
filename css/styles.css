@@ -46,7 +46,8 @@ header {
 }
 
 .nav-link:hover{
-    background-color: #002750;
+    background-color: #527091;
+    transition: ease-in-out 0.3s;
 }
 
 main {

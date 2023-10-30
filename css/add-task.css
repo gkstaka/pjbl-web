@@ -10,6 +10,7 @@
     margin:20px;
     padding:20px;
 }
+
 .form-group {
     margin-bottom: 20px;
     text-align: center;
@@ -45,7 +46,7 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-button {
+input [type="submit"] {
     color: white;
     margin: 5px;
     width: 6em;
@@ -55,13 +56,18 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+button:hover{
+    background-color: #2286f1;
+    transition: ease-in-out 0.3s; 
+}
+
+/* button:hover {
     background-color: #002750;
 }
 
 button:focus {
     background-color: #002750;
-}
+} */
 .added-task-h2{
     text-align: center;
 }
