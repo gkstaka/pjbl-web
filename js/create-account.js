@@ -2,7 +2,8 @@
 const submitButton = document.getElementById("submit")
 const form = document.getElementById("create-account")
 function verifyUserName(userName){
-    userNameRegex = /^[a-zA-Z0-9]+$/
+    userNameRegex = /^[a-zA-Z0-9]$/
+    return userNameRegex.test(userName)
 }
 
 function verifyEmail(email){
