@@ -68,7 +68,7 @@ include_once "connection.php";
 
                     mysqli_close($connection);
                 } catch (mysqli_sql_exception $e) {
-                    if (e->getCode() == 1062) {
+                    if ($e->getCode() == 1062) {
                         echo "<script>alert('Usuario ou e-mail já existentes')</script>";
                     }
                 }
@@ -77,6 +77,6 @@ include_once "connection.php";
         </main>
         <footer>&copy; 2023 Gerenciador de Tarefas</footer>
     </body>
-    <script src="js/create-account.js"></script>
+    <!-- <script src="js/create-account.js"></script> -->
 
 </html>

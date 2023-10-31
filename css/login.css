@@ -1,0 +1,29 @@
+#login-header {
+    text-align: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-text{
+    display:flex;
+    align-items: center;
+    margin:5px;
+}
+
+.input-text label {
+    text-align: right;
+    margin-right:10px;
+    width:150px
+}
+
+.input-text input{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+}
+

@@ -46,16 +46,6 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-input [type="submit"] {
-    color: white;
-    margin: 5px;
-    width: 6em;
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: #003b7a;
-    cursor: pointer;
-}
-
 button:hover{
     background-color: #2286f1;
     transition: ease-in-out 0.3s; 

@@ -43,11 +43,12 @@ header {
     margin: 15px;
     background-color: #003b7a;
     padding: 10px;
+    transition: ease-in-out 0.15s;
 }
 
-.nav-link:hover{
-    background-color: #527091;
-    transition: ease-in-out 0.3s;
+.nav-link:hover, .nav-link:focus{
+    background-color: #051c35;
+    transition: ease-in-out 0.15s;
 }
 
 main {
@@ -57,6 +58,23 @@ main {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
+}
+
+input[type="submit"] {
+    color: white;
+    margin: 5px;
+    /* width: 6em; */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #003b7a;
+    cursor: pointer;
+    border: none;
+    transition: ease-in-out 0.15s;
+}
+
+input[type="submit"]:hover, input[type="submit"]:focus {
+    transition: ease-in-out 0.15s;
+    background-color: #051c35;
 }
 
 footer {
