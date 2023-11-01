@@ -61,26 +61,26 @@ include_once "connection.php"
                                 <textarea id="description" name="description" rows="4"></textarea>
                             </div>
                         </div>
-                        <!-- <button onclick="addTask()">Adicionar Tarefa</button> -->
                         <input type="submit" value="Adicionar Tarefa" name="submit">
                     </div>
                 </form>
 
                 <?php
+                session_start();
                 if (isset($_POST["submit"])) {
                     $user_id = $_SESSION["id"];
-                    $task_name = $_POST["task-name"];
+                    $task_name = mysqli_real_escape_string($connection, $_POST["task-name"]);
                     $due_date = $_POST["due-date"];
-                    $priority = (int) $_POST["priority"];
-                    $description = $_POST["description"];
+                    $priority = intval($_POST["priority"]);
+                    $description = mysqli_real_escape_string($connection, $_POST["description"]);
                     $status = false;
                     $sql = "INSERT INTO task(user_id, title, due_date, priority, `description`, `status`)
-                    VALUES (NULL, $task_name, $due_date, $priority, $description, $status);";
+                    VALUES ('$user_id', '$task_name', '$due_date', '$priority', '$description', '$status');";
 
                     if (mysqli_query($connection, $sql)) {
-                        echo "<p>Tarefa adicionada</p>";
+                        echo "<h2>Tarefa adicionada com sucesso!</h2>";
                     } else {
-                        echo "<p>Erro ao adicionar tarefa</p>";
+                        echo "<h2>Erro ao adicionar tarefa</h2>";
                     }
 
                 }
