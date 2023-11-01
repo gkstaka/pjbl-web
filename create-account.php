@@ -42,8 +42,7 @@ include_once "connection.php";
                     <input type="password" name="password" id="password" autocomplete="off">
                     <br>
                 </div>
-                <span id="password-info">Sua senha deve conter no minimo 8 digitos, um numero, uma letra maiuscula, uma
-                    letra minuscula e um caracter especial</span>
+                <span id="password-info">Sua senha deve conter no minimo 8 digitos, um numero, uma letra maiuscula, uma letra minuscula e um caracter especial</span>
                 <br>
                 <br>
                 <input type="submit" id="submit" value="Cadastrar" name="register">

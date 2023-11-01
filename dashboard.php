@@ -1,3 +1,7 @@
+<?php
+include_once "connection.php"
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -9,6 +13,13 @@
         <link rel="stylesheet" href="css/dashboard.css" />
     </head>
     <body>
+
+        <?php
+        session_start();
+        $login = $_SESSION["id"];
+        
+        echo "<h1>id sessao: $login</h1>";
+        ?>
         <header id="header-container">
             <h1>Gerenciador de tarefas</h1>
             <nav>
@@ -18,7 +29,7 @@
                     <li class="nav-list-item"><a href="add-task.php" class="nav-link">Adicionar tarefa</a></li>
                     <li class="nav-list-item"><a href="statistics.php" class="nav-link">Estatísticas</a></li>
                     <li class="nav-list-item"><a href="profile.php" class="nav-link">Perfil</a></li>
-                    <li class="nav-list-item"><a href="login.php" class="nav-link">Logout</a></li>
+                    <li class="nav-list-item"><a href="logout.php" class="nav-link">Logout</a></li>
                 </ul>
             </nav>
         </header>
@@ -29,6 +40,8 @@
                     <div class="summary-item">
                         <h3>Vencimento para hoje</h3>
                         <span>5</span>
+                        
+                        
                     </div>
                     <div class="summary-item">
                         <h3>Vencimento para essa semana</h3>

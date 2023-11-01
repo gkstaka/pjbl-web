@@ -1,4 +1,6 @@
 <?php
+include_once "connection.php"
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +26,7 @@
 
         <main>
             <h2 id="login-header">Login</h2>
-            <form action="dashboard.php" method="post">
+            <form action="" method="post">
                 <div class="input-text">
                     <label for="login">Usuário ou e-mail: </label>
                     <input type="text" name="login" id="login" placeholder="Usuário ou e-mail">
@@ -39,13 +41,30 @@
             </form>
         </main>
         <?php
+        session_start();
+        // $my_session = session_id();
+        
         if (isset($_POST["submit"])) {
-            $query = "SELECT id FROM user"
+            $login = mysqli_real_escape_string($connection, $_POST["login"]);
+            $password = mysqli_real_escape_string($connection, $_POST["password"]);
+            $query = "SELECT id, password FROM user WHERE user_name ='$login' OR email='$login';";
+            $result = mysqli_query($connection, $query);
+            if (mysqli_num_rows($result) != 0) {
+                $row = mysqli_fetch_array($result);
+                if ($row["password"] == $password) {
+                    $_SESSION["id"] = $row["id"];
+                    $_SESSION["login"] = $login;
+                }
+                header("Location: dashboard.php");
+                exit();
+                // echo "<p>$id</p>";
+                // // $id = $result-
+                // echo "<script>alert('$id')</script>";
+            }
         }
-         // $query = "SELECT * FROM user WHERE email = $email OR user_name = $email";
         ?>
 
     </body>
-    
+
     <footer>&copy; 2023 Gerenciador de Tarefas</footer>
 </html>

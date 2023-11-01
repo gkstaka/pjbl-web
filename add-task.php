@@ -62,16 +62,16 @@ include_once "connection.php"
                             </div>
                         </div>
                         <!-- <button onclick="addTask()">Adicionar Tarefa</button> -->
-                        <input type="submit" value="Adicionar Tarefa">
+                        <input type="submit" value="Adicionar Tarefa" name="submit">
                     </div>
                 </form>
 
                 <?php
-                if (isset($_POST["add-task"])) {
-                    $user_id = $_GET["id"];
+                if (isset($_POST["submit"])) {
+                    $user_id = $_SESSION["id"];
                     $task_name = $_POST["task-name"];
                     $due_date = $_POST["due-date"];
-                    $priority = (int)$_POST["priority"];
+                    $priority = (int) $_POST["priority"];
                     $description = $_POST["description"];
                     $status = false;
                     $sql = "INSERT INTO task(user_id, title, due_date, priority, `description`, `status`)
