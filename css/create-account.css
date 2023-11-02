@@ -29,7 +29,6 @@ form {
 #password-info {
     font-size:x-small;
     max-width: 400px;
-    margin: 10px;
-    
+    margin: 0px;
+    padding:0px;
 }
-

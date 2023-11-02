@@ -1,7 +1,7 @@
 <?php
-include_once "connection.php"
-
-?>
+session_start();
+include_once "connection.php";
+    ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -41,7 +41,6 @@ include_once "connection.php"
             </form>
         </main>
         <?php
-        session_start();
         // $my_session = session_id();
         
         if (isset($_POST["submit"])) {
@@ -50,7 +49,7 @@ include_once "connection.php"
             $query = "SELECT id, password FROM user WHERE user_name ='$login' OR email='$login';";
             $result = mysqli_query($connection, $query);
             if (mysqli_num_rows($result) != 0) {
-                $row = mysqli_fetch_array($result);
+                $row = mysqli_fetch_assoc($result);
                 if ($row["password"] == $password) {
                     $_SESSION["id"] = $row["id"];
                     $_SESSION["login"] = $login;

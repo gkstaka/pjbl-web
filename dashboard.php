@@ -1,5 +1,6 @@
 <?php
-include_once "connection.php"
+session_start();
+include_once "connection.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,6 @@ include_once "connection.php"
     <body>
 
         <?php
-        session_start();
         $login = $_SESSION["id"];
         
         echo "<h1>id sessao: $login</h1>";

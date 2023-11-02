@@ -1,5 +1,6 @@
 <?php
-include_once "connection.php"
+session_start();
+include_once "connection.php";
     ?>
 
 <!DOCTYPE html>
@@ -66,7 +67,6 @@ include_once "connection.php"
                 </form>
 
                 <?php
-                session_start();
                 if (isset($_POST["submit"])) {
                     $user_id = $_SESSION["id"];
                     $task_name = mysqli_real_escape_string($connection, $_POST["task-name"]);
