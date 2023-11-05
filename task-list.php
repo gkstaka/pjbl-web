@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once "connection.php";
-    ?>
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,6 +13,23 @@ include_once "connection.php";
         <link rel="stylesheet" href="css/styles.css" />
         <link rel="stylesheet" href="css/task-list.css" />
     </head>
+    <style>
+        .task-link {
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 15px;
+            background-color: #003b7a;
+            padding: 5px;
+            transition: ease-in-out 0.15s;
+        }
+
+        .task-link:hover,
+        .task-link:focus {
+            transition: ease-in-out 0.15s;
+            background-color: #051c35;
+        }
+    </style>
     <body>
         <header>
             <h1>Gerenciador de tarefas</h1>
@@ -31,114 +48,50 @@ include_once "connection.php";
             <section class="task-list">
                 <h2>Lista de Tarefas</h2>
                 <ul class="unsorted-list">
-                    <li class="task-list-item">
-                        <div class="left-column-items">
-                            <h3 class="task-title">Tarefa 1 - Trabalho de História</h3>
-                            <span class="date">Data de Vencimento: 2023-12-31</span>
-                            <br /><br />
-                            <span class="priority">Prioridade: Alta</span>
-                            <p class="description">
-                                Descrição: Pesquisar e escrever um trabalho sobre a Revolução Industrial.
-                            </p>
-                        </div>
-                        <div class="right-column-items">
-                            <button class="complete-button button">Finalizar</button>
-                            <br />
-                            <button class="edit-button button">Editar</button>
-                            <br />
-                            <button class="delete-button button">Excluir</button>
-                        </div>
-                    </li>
-                    <li class="task-list-item">
-                        <div class="left-column-items">
-                            <h3 class="task-title">Tarefa 2 - Prova de Matemática</h3>
-                            <span class="date">Data de Vencimento: 2023-11-15</span>
-                            <br /><br />
-                            <span class="priority">Prioridade: Média</span>
-                            <p class="description">Descrição: Estudar para a prova de álgebra linear.</p>
-                        </div>
-                        <div class="right-column-items">
-                            <button class="complete-button button">Finalizar</button>
-                            <br />
-                            <button class="edit-button button">Editar</button>
-                            <br />
-                            <button class="delete-button button">Excluir</button>
-                        </div>
-                    </li>
-                    <li class="task-list-item">
-                        <div class="left-column-items">
-                            <h3 class="task-title">Tarefa 3 - Apresentação de Ciências</h3>
-                            <span class="date">Data de Vencimento: 2023-10-20</span>
-                            <br><br>
-                            <span class="priority">Prioridade: Baixa</span>
-                            <p class="description">
-                                Descrição: Preparar slides para a apresentação sobre ecossistemas marinhos.
-                            </p>
-                        </div>
-                        <div class="right-column-items">
-                            <button class="complete-button button">Finalizar</button>
-                            <br />
-                            <button class="edit-button button">Editar</button>
-                            <br />
-                            <button class="delete-button button">Excluir</button>
-                        </div>
-                    </li>
-                    <li class="task-list-item">
-                        <div class="left-column-items">
-                            <h3 class="task-title">Tarefa 4 - Projeto de Programação</h3>
-                            <span class="date">Data de Vencimento: 2023-09-05</span>
-                            <br><br>
-                            <span class="priority">Prioridade: Alta</span>
-                            <p class="description">
-                                Descrição: Desenvolver um aplicativo web utilizando HTML, CSS e JavaScript.
-                            </p>
-                        </div>
-                        <div class="right-column-items">
-                            <button class="complete-button button">Finalizar</button>
-                            <br />
-                            <button class="edit-button button">Editar</button>
-                            <br />
-                            <button class="delete-button button">Excluir</button>
-                        </div>
-                    </li>
-                    <li class="task-list-item">
-                        <div class="left-column-items">
-                            <h3 class="task-title">Tarefa 5 - Leitura Obrigatória</h3>
-                            <span class="date">Data de Vencimento: 2023-08-15</span>
-                            <br><br>
-                            <span class="priority">Prioridade: Média</span>
-                            <p class="description">
-                                Descrição: Ler e fazer um resumo do livro "Dom Casmurro" de Machado de Assis.
-                            </p>
-                        </div>
-                        <div class="right-column-items">
-                            <button class="complete-button button">Finalizar</button>
-                            <br />
-                            <button class="edit-button button">Editar</button>
-                            <br />
-                            <button class="delete-button button">Excluir</button>
-                        </div>
-                    </li>
-                    <li class="task-list-item">
-                        <div class="left-column-items">
-                            <h3 class="task-title">Tarefa 6 - Projeto de Pesquisa</h3>
-                            <span class="date">Data de Vencimento: 2023-07-01</span>
-                            <br><br>
-                            <span class="priority">Prioridade: Baixa</span>
-                            <p class="description">
-                                Descrição: Coletar dados e escrever um relatório sobre as mudanças climáticas globais.
-                            </p>
-                        </div>
-                        <div class="right-column-items">
-                            <button class="complete-button button">Finalizar</button>
-                            <br />
-                            <button class="edit-button button">Editar</button>
-                            <br />
-                            <button class="delete-button button">Excluir</button>
-                        </div>
-                    </li>
+                    <?php
+                    $id = $_SESSION["id"];
+                    $sql = "SELECT * FROM task WHERE user_id = $id ORDER BY status, due_date, priority DESC;";
+                    $result = mysqli_query($connection, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $status = "";
+                            if ($row["status"] == 1) {
+                                $status = " - Concluído";
+                            }
+                            $priority = "";
+                            switch ($row["priority"]) {
+                                case 1:
+                                    $priority = "Baixa";
+                                    break;
+                                case 2:
+                                    $priority = "Média";
+                                    break;
+                                case 3:
+                                    $priority = "Alta";
+                                    break;
+                            }
+                            echo "<li class='task-list-item'>
+                            <div class='left-column-items'>
+                                <h3 class='task-title'>" . $row['title'] . $status . "</h3>
+                                <span class='date'>Data de Vencimento: " . $row["due_date"] . "</span>
+                                <br /><br />
+                                <span class='priority'>Prioridade: " . $priority . "</span>
+                                <p class='description'>
+                                    Descrição: " . $row['description'] . "
+                                </p>
+                            </div>
+
+                            <div class='right-column-items'>
+                                <a href='finish-task.php?id=" . $row['id'] . "' class='task-link'>Concluir</a><br /><br />
+                                <a href='update-task.php?id=" . $row['id'] . "' class='task-link'>Editar</a><br /> <br />
+                                <a href='delete-task.php?id=" . $row['id'] . "' class='task-link'>Deletar</a><br />
+                                </div>";
+                        }
+
+                    }
+                    ?>
                 </ul>
-                <div class="task-added-box"></div>
             </section>
         </main>
         <footer>&copy; 2023 Gerenciador de Tarefas</footer>

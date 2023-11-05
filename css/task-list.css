@@ -34,7 +34,23 @@ ul {
     border-radius: 5px;
     text-align: center;
 }
-.button {
+
+/* .task-link{
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 15px;
+    background-color: #003b7a;
+    padding: 10px;
+    transition: ease-in-out 0.15s;
+}
+
+.task-link:hover, .task-link:focus{
+    transition: ease-in-out 0.15s;
+    background-color: #051c35;
+} */
+
+/* .button {
     color: white;
     margin: 5px;
     width: 6em;
@@ -46,9 +62,9 @@ ul {
 
 .button:hover {
     background-color: #002750;
-}
+} */
 
-@media screen and (orientation: portrait) {
+/* @media screen and (orientation: portrait) {
     .unsorted-list{
         display: flex;
         flex-direction: column;
@@ -82,4 +98,4 @@ ul {
         text-align: center;
     }
 
-}
+} */

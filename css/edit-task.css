@@ -1,12 +1,12 @@
-.add-task {
+.edit-task {
     text-align: center;
 }
 
-.add-task h2 {
+.edit-task h2 {
     text-align:center;
 }
 
-#add-task-form{
+#edit-task-form{
     margin:20px;
     padding:20px;
 }
@@ -46,7 +46,7 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-.added-task-h2{
+/* .added-task-h2{
     text-align: center;
 }
 
@@ -59,4 +59,4 @@ input[type="radio"] {
     color:white;
     align-items: center;
     justify-items:center;
-}
+} */

@@ -45,7 +45,7 @@ include_once "connection.php";
                             <label for="priority">Prioridade:</label>
                             <div class="radio-button-priority">
                                 <div class="radio-button-box">
-                                    <input type="radio" name="priority" id="priority-low" value="1" />
+                                    <input type="radio" name="priority" id="priority-low" value="1"/>
                                     <label for="priority-low">Baixa</label>
                                 </div>
                                 <div class="radio-button-box">
@@ -53,7 +53,7 @@ include_once "connection.php";
                                     <label for="priority-medium">Média</label>
                                 </div>
                                 <div class="radio-button-box">
-                                    <input type="radio" name="priority" id="priority=high" value="3" />
+                                    <input type="radio" name="priority" id="priority-high" value="3" />
                                     <label for="priority-high">Alta</label>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@ include_once "connection.php";
                                 <textarea id="description" name="description" rows="4" autocomplete="false"></textarea>
                             </div>
                         </div>
-                        <input type="submit" value="Adicionar Tarefa" name="submit" id="submit">
+                        <input type="submit" value="Criar nova tarefa" name="submit" id="submit">
                     </div>
                 </form>
 

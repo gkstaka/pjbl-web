@@ -43,6 +43,7 @@ header {
     margin: 15px;
     background-color: #003b7a;
     padding: 10px;
+    height: 20px;
     transition: ease-in-out 0.15s;
 }
 
@@ -62,7 +63,9 @@ main {
 
 input[type="submit"] {
     color: white;
-    margin: 5px;
+    margin: 15px;
+    padding: 10px;
+    height: 40px;
     /* width: 6em; */
     border-radius: 5px;
     font-size: 16px;
@@ -76,6 +79,8 @@ input[type="submit"]:hover, input[type="submit"]:focus {
     transition: ease-in-out 0.15s;
     background-color: #051c35;
 }
+
+
 
 footer {
     text-align: center;
