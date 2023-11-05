@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once "connection.php";
-    ?>
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,7 +23,7 @@ include_once "connection.php";
                     <li class="nav-list-item"><a href="add-task.php" class="nav-link">Adicionar tarefa</a></li>
                     <li class="nav-list-item"><a href="statistics.php" class="nav-link">Estatísticas</a></li>
                     <li class="nav-list-item"><a href="profile.php" class="nav-link">Perfil</a></li>
-                    <li class="nav-list-item"><a href="login.php" class="nav-link">Logout</a></li>
+                    <li class="nav-list-item"><a href="logout.php" class="nav-link">Logout</a></li>
                 </ul>
             </nav>
         </header>
@@ -31,11 +31,11 @@ include_once "connection.php";
             <section class="add-task">
                 <h2>Adicionar Nova Tarefa</h2>
 
-                <form action="add-task.php" method="post" name="add-task">
+                <form action="add-task.php" method="post" name="add-task" id="add-task">
                     <div id="add-task-form">
                         <div class="form-group">
                             <label for="task-name">Nome da Tarefa:</label>
-                            <input type="text" id="task-name" name="task-name" required />
+                            <input type="text" id="task-name" name="task-name" required autocomplete="false"/>
                         </div>
                         <div class="form-group">
                             <label for="due-date">Data de Vencimento:</label>
@@ -59,10 +59,10 @@ include_once "connection.php";
                             </div>
                             <div class="form-group">
                                 <label for="description">Descrição:</label>
-                                <textarea id="description" name="description" rows="4"></textarea>
+                                <textarea id="description" name="description" rows="4" autocomplete="false"></textarea>
                             </div>
                         </div>
-                        <input type="submit" value="Adicionar Tarefa" name="submit">
+                        <input type="submit" value="Adicionar Tarefa" name="submit" id="submit">
                     </div>
                 </form>
 
@@ -75,7 +75,7 @@ include_once "connection.php";
                     $description = mysqli_real_escape_string($connection, $_POST["description"]);
                     $status = false;
                     $sql = "INSERT INTO task(user_id, title, due_date, priority, `description`, `status`)
-                    VALUES ('$user_id', '$task_name', '$due_date', '$priority', '$description', '$status');";
+                    VALUES ('$user_id', '$task_name', '$due_date', $priority, '$description', '$status');";
 
                     if (mysqli_query($connection, $sql)) {
                         echo "<h2>Tarefa adicionada com sucesso!</h2>";
@@ -93,7 +93,31 @@ include_once "connection.php";
             </section>
         </main>
         <footer>&copy; 2023 Gerenciador de Tarefas</footer>
+        <script>
+            console.log("script")
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("DOM")
+                const form = document.getElementById("add-task")
+                console.log(form)
+                const submitButton = document.getElementById("submit-button")
+                const radioButtonValues = document.getElementsByName("priority")
+                form.addEventListener("submit", function (event) {
+                    let radioButtonFlag = false
+                    for (radioButton in radioButtonValues) {
+                        if (radioButtonValues[radioButton].checked) {
+                            radioButtonFlag = true
+                        }
+                        console.log(radioButtonFlag)
+                    }
+                    if (!radioButtonFlag) {
+                        alert("Selecione uma prioridade")
+                        event.preventDefault()
+                    }
+                })
 
-        <script src="js/add-task.js"></script>
+            })
+
+        </script>
+        <!-- <script src="js/add-task.js"></script> -->
     </body>
 </html>
