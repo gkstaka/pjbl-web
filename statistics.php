@@ -11,25 +11,43 @@ $query = "SELECT COUNT(*) AS `count` FROM task WHERE user_id = $id;";
 $queryResult = mysqli_query($connection, $query);
 $row = mysqli_fetch_assoc($queryResult);
 $totalTasks = $row["count"];
-$percentTaskComplete = number_format(($completedTasks / $totalTasks) * 100, 2);
+if ($totalTasks != 0) {
+    $percentTaskComplete = number_format(($completedTasks / $totalTasks) * 100, 2);
 
-$ongoingTasks = $totalTasks - $completedTasks;
-$percentOngoingTask = number_format(($ongoingTasks / $totalTasks) * 100, 2);
+    $ongoingTasks = $totalTasks - $completedTasks;
+    $percentOngoingTask = number_format(($ongoingTasks / $totalTasks) * 100, 2);
 
-$query = "SELECT COUNT(*) AS `count` FROM task WHERE user_id = $id GROUP BY priority ASC";
-$queryResult = mysqli_query($conneytion, $query);
+    $query = "SELECT COUNT(*) AS `count`, priority FROM task WHERE user_id = $id GROUP BY priority ASC";
+    $queryResult = mysqli_query($connection, $query);
 
-$row = mysqli_fetch_assoc($queryResult);
-$lowPriority = $row["count"];
-$percentLowPriority = number_format(($lowPriority / $totalTasks) * 100, 2);
+    // $numberRows = mysqli_num_rows($queryResult);
+    $lowPriority = 0;
+    $mediumPriority = 0;
+    $highPriority = 0;
+    $percentLowPriority = 0;
+    $percentMediumPriority = 0;
+    $percentHighPriority = 0;
 
-$row = mysqli_fetch_assoc($queryResult);
-$mediumPriority = $row["count"];
-$percentMediumPriority = number_format(($mediumPriority / $totalTasks) * 100, 2);
+    while ($row = mysqli_fetch_assoc($queryResult)) {
+        switch ($row["priority"]) {
+            case 1:
+                $lowPriority = $row["count"];
+                $percentLowPriority = number_format(($lowPriority / $totalTasks) * 100, 2);
+                break;
+            case 2:
+                $mediumPriority = $row["count"];
+                $percentMediumPriority = number_format(($mediumPriority / $totalTasks) * 100, 2);
+                break;
+            case 3:
+                $highPriority = $row["count"];
+                $percentHighPriority = number_format(($highPriority / $totalTasks) * 100, 2);
+                break;
 
-$row = mysqli_fetch_assoc($queryResult);
-$highPriority = $row["count"];
-$percentHighPriority = number_format(($highPriority / $totalTasks) * 100, 2);
+        }
+    }
+
+
+}
 
 ?>
 
@@ -64,34 +82,39 @@ $percentHighPriority = number_format(($highPriority / $totalTasks) * 100, 2);
                     <div class="stat-item">
                         <h3>Tarefas Completadas</h3>
                         <?php
-                        echo "<span>Total: $completedTasks</span>";
-                        ?>
-                        <br>
-                        <?php
-                        echo "<span>Percentual: $percentTaskComplete%</span>";
+                        if ($totalTasks == 0) {
+                            echo "<span>Nenhuma tarefa registrada</span>";
+                        } else {
+                            echo "<span>Total: $completedTasks</span>";
+                            echo "<br>";
+                            echo "<span>Percentual: $percentTaskComplete%</span>";
+                        }
                         ?>
                     </div>
                     <div class="stat-item">
                         <h3>Tarefas em Andamento</h3>
                         <?php
-                        echo "<span>Total: $ongoingTasks</span>";
-                        ?>
-                        <br>
-                        <?php
-                        echo "<span>Percentual: $percentOngoingTask%</span>";
+                        if ($totalTasks == 0) {
+                            echo "<span>Nenhuma tarefa registrada</span>";
+                        } else {
+                            echo "<span>Total: $ongoingTasks</span>";
+                            echo "<br>";
+                            echo "<span>Percentual: $percentOngoingTask%</span>";
+                        }
                         ?>
                     </div>
                     <div class="stat-item">
                         <h3>Prioridade das Tarefas</h3>
                         <ul>
                             <?php
-                            echo "<li>Alta: $highPriority tarefas ($percentLowPriority%)</li>";
-                            echo "<li>Média: $mediumPriority tarefas ($percentMediumPriority%)</li>";
-                            echo "<li>Baixa: $lowPriority tarefas ($percentHighPriority%)</li>";
+                            if ($totalTasks == 0) {
+                                echo "<span>Nenhuma tarefa registrada</span>";
+                            } else {
+                                echo "<li>Alta: $highPriority tarefas ($percentHighPriority%)</li>";
+                                echo "<li>Média: $mediumPriority tarefas ($percentMediumPriority%)</li>";
+                                echo "<li>Baixa: $lowPriority tarefas ($percentLowPriority%)</li>";
+                            }
                             ?>
-                            <!-- <li>Alta: 10 tarefas (20%)</li> -->
-                            <!-- <li>Média: 20 tarefas (40%)</li>
-                            <li>Baixa: 20 tarefas (40%)</li> -->
                         </ul>
                     </div>
                 </div>

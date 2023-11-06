@@ -1,6 +1,13 @@
 <?php
 session_start();
 include_once "connection.php";
+$id = $_SESSION["id"];
+$query = "SELECT email, password FROM user WHERE id = $id;";
+$result = mysqli_query($connection, $query);
+$row = mysqli_fetch_assoc($result);
+$email = $row["email"];
+$password = $row["password"];
+echo $email;
     ?>
 
 <!DOCTYPE html>
@@ -31,13 +38,19 @@ include_once "connection.php";
             <section class="profile">
                 <h2>Meu Perfil</h2>
                 <div class="profile-info">
-                    <img src="assets/images/avatar.png" alt="Minha Foto de Perfil" width="200px" />
-                    <h3>Nome: João Costa</h3>
-                    <span id="email">Email: joao.costa@example.com</span>
-                    <br /><br />
-                    <span id="location">Localização: Cidade, País</span>
-                    <br /><br />
-                    <span id="birth-date">Data de Nascimento: 1997-07-22</span>
+                    <!-- <img src="assets/images/avatar.png" alt="Minha Foto de Perfil" width="200px" /> -->
+                    <form action="" method="post">
+                        <?php
+                        echo "<input type='email' name='email' id='email' required value='$email'>";
+                        
+                        ?>
+
+                    </form>
+
+
+                    <h3>Usuário: João Costa</h3>
+                    <h3 id="email">Email: joao.costa@example.com</h3>
+                    <br />
                 </div>
                 <div class="profile-actions">
                     <button onclick="changeEmail()">Editar Email</button>

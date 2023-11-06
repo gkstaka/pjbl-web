@@ -89,13 +89,13 @@ include_once "connection.php";
                                 </div>";
                         }
 
+                    } else {
+                        echo "<p>Nenhuma tarefa registrada</p>";
                     }
                     ?>
                 </ul>
             </section>
         </main>
         <footer>&copy; 2023 Gerenciador de Tarefas</footer>
-        <script src="assets/js/task-list.js"></script>
-        <script src="assets/js/header-template-tasks.js"></script>
     </body>
 </html>
