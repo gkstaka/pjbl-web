@@ -22,9 +22,10 @@
         <main>
             <h2 id="login-header">Login</h2>
             <form action="" method="post">
+                <!-- add required to fields -->
                 <div class="input-text">
                     <label for="login">Usuário ou e-mail: </label>
-                    <input type="text" name="login" id="login" placeholder="Usuário ou e-mail">
+                    <input type="text" name="login" id="login" placeholder="Usuário ou e-mail"> 
                 </div>
                 <br>
                 <div class="input-text">
@@ -51,9 +52,6 @@
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION["id"] = $row["id"];
                 header("Location: dashboard.php");
-                // echo "<p>$id</p>";
-                // // $id = $result-
-                // echo "<script>alert('$id')</script>";
             } else {
                 echo "<script>alert('Usuário ou senha inválidos')</script>";
                 exit();

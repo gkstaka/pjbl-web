@@ -27,17 +27,18 @@
             <form action="" method="post" name="create-account" id="create-account">
                 <div class="input-text">
                     <label for="email">E-mail: </label>
-                    <input type="email" name="email" id="email" placeholder="seu.email@aqui.com" autocomplete="off">
+                    <input type="email" name="email" id="email" placeholder="seu.email@aqui.com" autocomplete="off"
+                        required>
                 </div>
                 <br>
                 <div class="input-text">
                     <label for="username">Usuário: </label>
-                    <input type="text" name="username" id="username" autocomplete="off">
+                    <input type="text" name="username" id="username" autocomplete="off" required>
                 </div>
                 <br>
                 <div class="input-text">
                     <label for="password">Senha: </label>
-                    <input type="password" name="password" id="password" autocomplete="off">
+                    <input type="password" name="password" id="password" autocomplete="off" required>
                     <br>
                 </div>
                 <span id="password-info">Sua senha deve conter no minimo 8 digitos, um numero, uma letra maiuscula, uma
@@ -49,7 +50,7 @@
                 <div id="error-message"></div>
             </form>
             <?php
-               include_once "connection.php"; 
+            include_once "connection.php";
 
             if (isset($_POST["register"])) {
                 try {
@@ -101,6 +102,24 @@
             return passwordRegex.test(password)
         }
 
+        function maskEmail(input) {
+            let emailValue = input.value
+            const emailMaskRegex = /^[a-zA-Z0-9._@-]/
+            // testa se o novo caracter inserido está dentro dos caracteres validos
+            if (!emailMaskRegex.test(emailValue[emailValue.length - 1])) {
+                input.value = emailValue.substring(0, emailValue.length - 1)
+            }
+
+        }
+
+        function maskUser(input) {
+            let userValue = input.value
+            const userMaskRegex = /^[a-zA-Z0-9]/
+            // testa se o novo caracter inserido está dentro dos caracteres validos
+            if (!userMaskRegex.test(userValue[userValue.length - 1]) || input.value.length > 10) {
+                input.value = userValue.substring(0, userValue.length - 1)
+            }
+        }
         document.addEventListener("DOMContentLoaded", function () {
             const submitButton = document.getElementById("submit-button")
             const form = document.getElementById("create-account")
@@ -108,24 +127,6 @@
             const userName = document.getElementById("username")
             const password = document.getElementById("password")
 
-            function maskEmail(input) {
-                let emailValue = input.value
-                const emailMaskRegex = /^[a-zA-Z0-9._@-]/
-                // testa se o novo caracter inserido está dentro dos caracteres validos
-                if (!emailMaskRegex.test(emailValue[emailValue.length - 1])) {
-                    input.value = emailValue.substring(0, emailValue.length - 1)
-                }
-
-            }
-
-            function maskUser(input) {
-                let userValue = input.value
-                const userMaskRegex = /^[a-zA-Z0-9]/
-                // testa se o novo caracter inserido está dentro dos caracteres validos
-                if (!userMaskRegex.test(userValue[userValue.length - 1]) || input.value.length > 10) {
-                    input.value = userValue.substring(0, userValue.length - 1)
-                }
-            }
 
             email.addEventListener("input", function () {
                 maskEmail(this)
@@ -135,13 +136,13 @@
                 maskUser(this)
             })
 
-            submitButton.addEventListener("click", function(){
+            submitButton.addEventListener("click", function () {
                 console.log("botao clicado")
             })
 
             form.addEventListener("submit", function (event) {
                 let validateInput = true
-                
+
                 console.log("botao clicado")
                 if (!verifyEmail(email.value)) {
                     console.log("email invalido: " + email.value)

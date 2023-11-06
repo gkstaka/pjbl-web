@@ -1,39 +1,52 @@
-.profile{
-    display:flex;
+.profile {
+    display: flex;
     flex-direction: column;
     justify-items: center;
 }
 
-.profile h2{
+.profile h2 {
     text-align: center;
 }
 
-.profile-info{
+.profile-info {
     text-align: center;
 }
 
-.profile-actions{
+.profile-actions {
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
 }
 
-button {
-    color: white;
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-text {
+    display: flex;
+    align-items: center;
     margin: 5px;
-    width: 6em;
+
+}
+
+.input-text label {
+    text-align: right;
+    margin-right: 10px;
+    width: 150px;
+}
+
+.input-text input {
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
-    background-color: #003b7a;
-    cursor: pointer;
+    width: 300px;
 }
 
-button:hover {
-    background-color: #002750;
+#password-info {
+    font-size:x-small;
+    max-width: 400px;
+    margin: 0px;
+    padding:0px;
 }
-
-button:focus {
-    background-color: #002750;
-}
-

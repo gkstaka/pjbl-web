@@ -2,13 +2,13 @@
 session_start();
 include_once "connection.php";
 $id = $_SESSION["id"];
-$query = "SELECT email, password FROM user WHERE id = $id;";
+$query = "SELECT user_name, email, password FROM user WHERE id = $id;";
 $result = mysqli_query($connection, $query);
 $row = mysqli_fetch_assoc($result);
+$userName = $row["user_name"];
 $email = $row["email"];
 $password = $row["password"];
-echo $email;
-    ?>
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -38,29 +38,20 @@ echo $email;
             <section class="profile">
                 <h2>Meu Perfil</h2>
                 <div class="profile-info">
-                    <!-- <img src="assets/images/avatar.png" alt="Minha Foto de Perfil" width="200px" /> -->
-                    <form action="" method="post">
-                        <?php
-                        echo "<input type='email' name='email' id='email' required value='$email'>";
-                        
-                        ?>
-
-                    </form>
-
-
-                    <h3>Usuário: João Costa</h3>
-                    <h3 id="email">Email: joao.costa@example.com</h3>
+                    <?php
+                    echo "
+                        <h3>Usuário: $userName</h3>
+                        <h3 id='email'>Email: $email</h3>
+                        ";
+                    ?>
                     <br />
                 </div>
                 <div class="profile-actions">
-                    <button onclick="changeEmail()">Editar Email</button>
-                    <!-- Password is defined as 1A2b3$4C -->
-                    <button onclick="changePassword()">Mudar Senha</button>
+                    <a href="change-email.php">Alterar e-mail</a>
+                    <a href="change-password.php">Alterar senha</a>
                 </div>
             </section>
         </main>
         <footer>&copy; 2023 Gerenciador de Tarefas</footer>
-        <script src="assets/js/profile.js"></script>
-        <script src="assets/js/header-template-tasks.js"></script>
     </body>
 </html>

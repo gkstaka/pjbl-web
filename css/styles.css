@@ -6,6 +6,22 @@
     /* font-weight: bold; */
 }
 
+a{
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 15px;
+    background-color: #003b7a;
+    padding: 10px;
+    height: 20px;
+    transition: ease-in-out 0.15s;
+}
+
+a:hover, a:focus{
+    background-color: #051c35;
+    transition: ease-in-out 0.15s;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -80,7 +96,17 @@ input[type="submit"]:hover, input[type="submit"]:focus {
     background-color: #051c35;
 }
 
+input[type="email"]{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+}
 
+input[type="password"]{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+}
 
 footer {
     text-align: center;

@@ -88,9 +88,6 @@ include_once "connection.php";
                 ?>
 
             </section>
-            <section id="added-task">
-                <!-- created tasks will be displayed here after submitting -->
-            </section>
         </main>
         <footer>&copy; 2023 Gerenciador de Tarefas</footer>
         <script>
