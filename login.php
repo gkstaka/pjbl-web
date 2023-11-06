@@ -1,8 +1,3 @@
-<?php
-session_start();
-include_once "connection.php";
-    ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -41,6 +36,10 @@ include_once "connection.php";
             </form>
         </main>
         <?php
+    
+        session_start();
+        include_once "connection.php";
+            
         // $my_session = session_id();
         
         if (isset($_POST["submit"])) {

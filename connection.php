@@ -1,5 +1,5 @@
 <?php
-    $dbServerName = 'localhost:3307';
+    $dbServerName = 'localhost';
     $dbUserName = 'root';
     $dbPassword = '';
     $dbName = 'task_manager';

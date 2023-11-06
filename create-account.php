@@ -1,7 +1,3 @@
-<?php
-include_once "connection.php";
-?>
-
 <html lang="pt-br">
 
     <head>
@@ -53,6 +49,8 @@ include_once "connection.php";
                 <div id="error-message"></div>
             </form>
             <?php
+               include_once "connection.php"; 
+
             if (isset($_POST["register"])) {
                 try {
 
@@ -192,5 +190,4 @@ include_once "connection.php";
             })
         })
     </script>
-
 </html>
