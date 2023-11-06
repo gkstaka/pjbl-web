@@ -1,7 +1,37 @@
 <?php
 session_start();
 include_once "connection.php";
-    ?>
+$id = $_SESSION["id"];
+$query = "SELECT COUNT(*) AS `count` FROM task WHERE user_id = $id AND status = true";
+$queryResult = mysqli_query($connection, $query);
+$row = mysqli_fetch_assoc($queryResult);
+$completedTasks = $row["count"];
+
+$query = "SELECT COUNT(*) AS `count` FROM task WHERE user_id = $id;";
+$queryResult = mysqli_query($connection, $query);
+$row = mysqli_fetch_assoc($queryResult);
+$totalTasks = $row["count"];
+$percentTaskComplete = number_format(($completedTasks / $totalTasks) * 100, 2);
+
+$ongoingTasks = $totalTasks - $completedTasks;
+$percentOngoingTask = number_format(($ongoingTasks / $totalTasks) * 100, 2);
+
+$query = "SELECT COUNT(*) AS `count` FROM task WHERE user_id = $id GROUP BY priority ASC";
+$queryResult = mysqli_query($conneytion, $query);
+
+$row = mysqli_fetch_assoc($queryResult);
+$lowPriority = $row["count"];
+$percentLowPriority = number_format(($lowPriority / $totalTasks) * 100, 2);
+
+$row = mysqli_fetch_assoc($queryResult);
+$mediumPriority = $row["count"];
+$percentMediumPriority = number_format(($mediumPriority / $totalTasks) * 100, 2);
+
+$row = mysqli_fetch_assoc($queryResult);
+$highPriority = $row["count"];
+$percentHighPriority = number_format(($highPriority / $totalTasks) * 100, 2);
+
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,7 +53,7 @@ include_once "connection.php";
                     <li class="nav-list-item"><a href="add-task.php" class="nav-link">Adicionar tarefa</a></li>
                     <li class="nav-list-item"><a href="statistics.php" class="nav-link">Estatísticas</a></li>
                     <li class="nav-list-item"><a href="profile.php" class="nav-link">Perfil</a></li>
-                    <li class="nav-list-item"><a href="login.php" class="nav-link">Logout</a></li>
+                    <li class="nav-list-item"><a href="logout.php" class="nav-link">Logout</a></li>
                 </ul>
             </nav>
         </header>
@@ -33,22 +63,35 @@ include_once "connection.php";
                 <div class="statistics-box">
                     <div class="stat-item">
                         <h3>Tarefas Completadas</h3>
-                        <span>Total: 35</span>
+                        <?php
+                        echo "<span>Total: $completedTasks</span>";
+                        ?>
                         <br>
-                        <span>Percentual: 70%</span>
+                        <?php
+                        echo "<span>Percentual: $percentTaskComplete%</span>";
+                        ?>
                     </div>
                     <div class="stat-item">
                         <h3>Tarefas em Andamento</h3>
-                        <span>Total: 15</span>
+                        <?php
+                        echo "<span>Total: $ongoingTasks</span>";
+                        ?>
                         <br>
-                        <span>Percentual: 30%</span>
+                        <?php
+                        echo "<span>Percentual: $percentOngoingTask%</span>";
+                        ?>
                     </div>
                     <div class="stat-item">
                         <h3>Prioridade das Tarefas</h3>
                         <ul>
-                            <li>Alta: 10 tarefas (20%)</li>
-                            <li>Média: 20 tarefas (40%)</li>
-                            <li>Baixa: 20 tarefas (40%)</li>
+                            <?php
+                            echo "<li>Alta: $highPriority tarefas ($percentLowPriority%)</li>";
+                            echo "<li>Média: $mediumPriority tarefas ($percentMediumPriority%)</li>";
+                            echo "<li>Baixa: $lowPriority tarefas ($percentHighPriority%)</li>";
+                            ?>
+                            <!-- <li>Alta: 10 tarefas (20%)</li> -->
+                            <!-- <li>Média: 20 tarefas (40%)</li>
+                            <li>Baixa: 20 tarefas (40%)</li> -->
                         </ul>
                     </div>
                 </div>

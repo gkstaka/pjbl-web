@@ -23,7 +23,7 @@ include_once "connection.php";
                     <li class="nav-list-item"><a href="add-task.php" class="nav-link">Adicionar tarefa</a></li>
                     <li class="nav-list-item"><a href="statistics.php" class="nav-link">Estatísticas</a></li>
                     <li class="nav-list-item"><a href="profile.php" class="nav-link">Perfil</a></li>
-                    <li class="nav-list-item"><a href="login.php" class="nav-link">Logout</a></li>
+                    <li class="nav-list-item"><a href="logout.php" class="nav-link">Logout</a></li>
                 </ul>
             </nav>
         </header>

@@ -36,28 +36,27 @@
             </form>
         </main>
         <?php
-    
+
         session_start();
         include_once "connection.php";
-            
+
         // $my_session = session_id();
         
         if (isset($_POST["submit"])) {
             $login = mysqli_real_escape_string($connection, $_POST["login"]);
             $password = mysqli_real_escape_string($connection, $_POST["password"]);
-            $query = "SELECT id, password FROM user WHERE user_name ='$login' OR email='$login';";
+            $query = "SELECT id FROM user WHERE (user_name ='$login' OR email='$login') AND password = '$password';";
             $result = mysqli_query($connection, $query);
             if (mysqli_num_rows($result) != 0) {
                 $row = mysqli_fetch_assoc($result);
-                if ($row["password"] == $password) {
-                    $_SESSION["id"] = $row["id"];
-                    $_SESSION["login"] = $login;
-                }
+                $_SESSION["id"] = $row["id"];
                 header("Location: dashboard.php");
-                exit();
                 // echo "<p>$id</p>";
                 // // $id = $result-
                 // echo "<script>alert('$id')</script>";
+            } else {
+                echo "<script>alert('Usuário ou senha inválidos')</script>";
+                exit();
             }
         }
         ?>

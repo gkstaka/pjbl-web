@@ -1,6 +1,27 @@
 <?php
 session_start();
 include_once "connection.php";
+$userId = $_SESSION["id"];
+//TAREFAS PARA HOJE
+$currentDate = date('Y-m-d');
+$vencimentohoje = "SELECT * FROM task WHERE user_id = '$userId' AND due_date = '$currentDate' AND status = false";
+$runquery = mysqli_query($connection, $vencimentohoje);
+$tarefashoje = mysqli_num_rows($runquery);
+
+
+//TAREFAS PARA SEMANA
+// $semana = date('Y-m-d', strtotime($currentDate . '+ 7 days'));
+$vencimentosemana = "SELECT * FROM task WHERE user_id = '$userId' AND WEEKOFYEAR(due_date) = WEEKOFYEAR('$currentDate') AND status = false";
+$runquery1 = mysqli_query($connection, $vencimentosemana);
+$tarefassemana = mysqli_num_rows($runquery1);
+
+
+
+
+//TOTAL DE TAREFAS
+$querytotaltarefas = "SELECT * FROM task WHERE user_id = '$userId' AND status = false";
+$runquery2 = mysqli_query($connection, $querytotaltarefas);
+$totaltarefas = mysqli_num_rows($runquery2);
 ?>
 
 <!DOCTYPE html>
@@ -16,9 +37,6 @@ include_once "connection.php";
     <body>
 
         <?php
-        $login = $_SESSION["id"];
-        
-        echo "<h1>id sessao: $login</h1>";
         ?>
         <header id="header-container">
             <h1>Gerenciador de tarefas</h1>
@@ -39,17 +57,22 @@ include_once "connection.php";
                 <div class="summary">
                     <div class="summary-item">
                         <h3>Vencimento para hoje</h3>
-                        <span><?php echo $tarefashoje ?></span>
-                        
-                        
+                        <?php
+                        echo "<span>$tarefashoje</span>"
+                            ?>
                     </div>
                     <div class="summary-item">
                         <h3>Vencimento para essa semana</h3>
-                        <span></span>
+                        <?php
+                        echo "<span>$tarefassemana</span>"
+                        ?>
                     </div>
                     <div class="summary-item">
                         <h3>Total de tarefas</h3>
-                        <span></span>
+                        <br>
+                        <?php
+                        echo "<span>$totaltarefas</span>"
+                        ?>
                     </div>
                 </div>
             </section>
@@ -58,37 +81,5 @@ include_once "connection.php";
             &copy; 2023 Gerenciador de tarefas
         </footer>
     </body>
-    <?php
 
-        //TAREFAS PARA HOJE
-        $currentDate = date('Y-m-d');
-        $vencimentohoje = "SELECT * FROM task WHERE user_id = '$login' AND due_date = '$currentDate'";
-        $runquery = mysqli_query($connection, $vencimentohoje);
-        $tarefashoje = mysqli_num_rows($runquery);
-      
-
-        //TAREFAS PARA SEMANA
-        $semana = date('Y-m-d', strtotime($currentDate .'+ 7 days'));
-        $vencimentosemana= "SELECT * FROM task WHERE user_id = '$login' AND due_date <= '$semana'";
-        $runquery1 = mysqli_query($connection, $vencimentosemana);
-        $tarefassemana = mysqli_num_rows($runquery1);
-
-
-
-
-        //TOTAL DE TAREFAS
-        $querytotaltarefas = "SELECT * FROM task WHERE user_id = '$login'";
-        $runquery2 = mysqli_query($connection, $querytotaltarefas);
-        $totaltarefas = mysqli_num_rows($runquery2);
-
-
-        echo $tarefashoje;
-        echo " ";
-        echo " ";
-        echo $tarefassemana;
-        echo " ";
-        echo " ";
-        echo $totaltarefas;
-
-    ?> 
 </html>
