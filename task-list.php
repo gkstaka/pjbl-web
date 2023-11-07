@@ -77,9 +77,10 @@ include_once "connection.php";
                                 <span class='date'>Data de Vencimento: " . $row["due_date"] . "</span>
                                 <br /><br />
                                 <span class='priority'>Prioridade: " . $priority . "</span>
-                                <p class='description'>
+                                <br /><br />
+                                <span class='description'>
                                     Descrição: " . $row['description'] . "
-                                </p>
+                                </span>
                             </div>
 
                             <div class='right-column-items'>
