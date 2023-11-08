@@ -22,15 +22,14 @@
         <main>
             <h2 id="login-header">Login</h2>
             <form action="" method="post">
-                <!-- add required to fields -->
                 <div class="input-text">
                     <label for="login">Usuário ou e-mail: </label>
-                    <input type="text" name="login" id="login" placeholder="Usuário ou e-mail"> 
+                    <input type="text" name="login" id="login" placeholder="Usuário ou e-mail" oninput="maskEmail(this)" required> 
                 </div>
                 <br>
                 <div class="input-text">
                     <label for="password">Senha: </label>
-                    <input type="password" name="password" id="password">
+                    <input type="password" name="password" id="password" oninput="maskPassword(this)" required>
                 </div>
                 <br>
                 <input type="submit" value="Entrar" name="submit">
@@ -39,10 +38,7 @@
         <?php
 
         session_start();
-        include_once "connection.php";
-
-        // $my_session = session_id();
-        
+        include_once "connection.php";        
         if (isset($_POST["submit"])) {
             $login = mysqli_real_escape_string($connection, $_POST["login"]);
             $password = mysqli_real_escape_string($connection, $_POST["password"]);
@@ -62,4 +58,5 @@
     </body>
 
     <footer>&copy; 2023 Gerenciador de Tarefas</footer>
+    <script src="js/user.js"></script>
 </html>

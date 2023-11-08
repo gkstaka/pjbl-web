@@ -44,7 +44,7 @@ if ($row["id"] == null) {
                         <label for="task-name">Nome da Tarefa:</label>
                         <?php
                         $title = $row['title'];
-                        echo "<input type='text' id='task-name' name='task-name' required autocomplete='false' value='$title'/>";
+                        echo "<input type='text' id='task-name' name='task-name' required autocomplete='false' value='$title' oninput='maxTitleLength(this)'/>";
                         ?>
                     </div>
                     <div class="form-group">
@@ -99,7 +99,7 @@ if ($row["id"] == null) {
                             $result = mysqli_query($connection, $sql);
                             $row = mysqli_fetch_assoc($result);
                             $description = $row['description'];
-                            echo "<textarea id='description' name='description' rows='4' autocomplete='false'>$description</textarea>"
+                            echo "<textarea id='description' name='description' rows='4' autocomplete='false' oninput='maxDescriptionLength(this)'>$description</textarea>"
                                 ?>
                         </div>
                         <input type="submit" value="Editar" name="submit" id="submit">
@@ -113,8 +113,6 @@ if ($row["id"] == null) {
                 $due_date = $_POST["due-date"];
                 $priority = intval($_POST["priority"]);
                 $description = mysqli_real_escape_string($connection, $_POST["description"]);
-            
-                // Update the task
                 $sql = "UPDATE task SET title = '$task_name', due_date = '$due_date', priority = $priority,
                         description = '$description' WHERE id = $id AND user_id = $userId";
                 if (mysqli_query($connection, $sql)) {
@@ -126,7 +124,7 @@ if ($row["id"] == null) {
             ?>
         </main>
         <footer>&copy; 2023 Gerenciador de Tarefas</footer>
-
+            <script src="js/task.js"></script>
 
     </body>
 </html>

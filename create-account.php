@@ -61,7 +61,6 @@
                     $sql = "INSERT INTO user (id, user_name, email, password) VALUES (NULL, '$userName', '$email', '$password');";
 
                     if (mysqli_query($connection, $sql)) {
-                        // echo "<script> alert('Conta criada com sucesso')</script>";
                         echo "<h2 style='
                         text-align: center;
                         align-items: center;'
@@ -81,6 +80,5 @@
         </main>
         <footer>&copy; 2023 Gerenciador de Tarefas</footer>
     </body>
-    <!-- <script src="js/create-account.js"></script> -->
-    <script src="js/create-account.js"></script>
+    <script src="js/user.js"></script>
 </html>

@@ -35,91 +35,54 @@ $id = $_SESSION["id"];
                     <form action="" method="post" name="change-password" id="change-password">
                         <div class="input-text">
                             <label for="current-password">Senha atual: </label>
-                            <input type="password" name="current-password" id="current-password">
+                            <input type="password" name="current-password" id="current-password"
+                                oninput="maskPassword(this)" autocomplete="off" required>
                             <br>
                         </div>
                         <div class="input-text">
                             <label for="new-password">Nova senha: </label>
-                            <input type="password" name="new-password" id="new-password">
+                            <input type="password" name="new-password" id="new-password" oninput="maskPassword(this)"
+                                autocomplete="off" required>
                             <br>
                         </div>
                         <div class="input-text">
                             <label for="confirmation-password">Confirmação da nova senha: </label>
-                            <input type="password" name="confirmation-password" id="confirmation-password">
+                            <input type="password" name="confirmation-password" id="confirmation-password"
+                                oninput="maskPassword(this)" autocomplete="off" required>
                         </div>
                         <span id="password-info">Sua senha deve conter no minimo 8 digitos, um numero, uma letra
                             maiuscula, uma letra minuscula e um caracter especial</span>
                         <div class="profile-actions">
-                            <input type="submit" value="Alterar senha">
+                            <input type="submit" value="Alterar senha" name="submit">
+                        </div>
+                        <div id="error-message">
                         </div>
                     </form>
-
+                    <?php
+                    if (isset($_POST["submit"])) {
+                        try {
+                            $query = "SELECT password FROM user WHERE id = $id;";
+                            $result = mysqli_query($connection, $query);
+                            $row = mysqli_fetch_assoc($result);
+                            $password = $row["password"];
+                            $newPassword = $_POST["new-password"];
+                            if ($_POST["current-password"] != $password) {
+                                echo "<p>Senha atual incorreta</p>";
+                            } else {
+                                $query = "UPDATE user SET password = '$newPassword' WHERE id = $id;";
+                                if (mysqli_query($connection, $query)) {
+                                    header("Location: profile.php");
+                                }
+                            }
+                        } catch (Exception $e) {
+                            echo $e->getMessage();
+                        }
+                    }
+                    ?>
                 </div>
             </section>
         </main>
         <footer>&copy; 2023 Gerenciador de Tarefas</footer>
-        <script>
-            function verifyPassword(password) {
-                const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-=+_{}\[\]|;:.,<>?/])[A-Za-z\d!@#$%^&*()\-=+_{}\[\]|;:.,<>?/]{8,}$/
-                return passwordRegex.test(password)
-            }
-
-            document.addEventListener("DOMContentLoaded", function () {
-                const submit = document.getElementById("submit")
-                const form = document.getElementById("change-password")
-                const currentPassword = document.getElementById("current-password")
-                const newPassword = document.getElementById("new-password")
-                const confirmationPassword = document.getElementById("confirmation-password")
-
-                form.addEventListener("submit", function (event) {
-                    let validateInput = true
-
-                    if (!verifyEmail(email.value)) {
-                        console.log("email invalido: " + email.value)
-                        document.getElementById("error-message").innerHTML = "Os campos em vermelho devem ser válidos"
-                        email.style.transition = "ease-in-out 0.3s"
-                        email.style.border = "solid 1px #f07560"
-                        validateInput = false
-                        event.preventDefault()
-                    }
-                    else {
-                        console.log(email.value)
-                        email.style.border = "solid 1px #cccccc"
-                    }
-                    if (!verifyUserName(userName.value)) {
-                        console.log("username invalido: " + userName.value)
-                        document.getElementById("error-message").innerHTML = "Os campos em vermelho devem ser válidos"
-                        userName.style.transition = "ease-in-out 0.3s"
-                        userName.style.border = "solid 1px #f07560"
-                        validateInput = false
-                        event.preventDefault()
-                    }
-                    else {
-                        console.log(userName.value)
-                        userName.style.border = "solid 1px #cccccc"
-                    }
-                    if (!verifyPassword(password.value)) {
-                        console.log("password invalido: " + password.value)
-                        document.getElementById("error-message").innerHTML = "Os campos em vermelho devem ser válidos"
-                        password.style.transition = "ease-in-out 0.3s"
-                        password.style.border = "solid 1px #f07560"
-                        validateInput = false
-                        event.preventDefault()
-                    }
-                    else {
-                        console.log(password.value)
-                        password.style.border = "solid 1px #cccccc"
-                    }
-
-                    if (validateInput) {
-                        console.log("submit")
-                        form.submit()
-                    }
-                    else {
-                        console.log("nao valido")
-                    }
-                })
-            })
-        </script>6
+        <script src="js/change-password.js"></script>
     </body>
 </html>

@@ -20,7 +20,6 @@ if ($totalTasks != 0) {
     $query = "SELECT COUNT(*) AS `count`, priority FROM task WHERE user_id = $id GROUP BY priority ASC";
     $queryResult = mysqli_query($connection, $query);
 
-    // $numberRows = mysqli_num_rows($queryResult);
     $lowPriority = 0;
     $mediumPriority = 0;
     $highPriority = 0;

@@ -20,6 +20,11 @@ ul {
     box-sizing: border-box;
 }
 
+.task-title{
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
 .left-column-items {
     margin: 20px;
     padding: 20px;

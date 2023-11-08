@@ -31,11 +31,11 @@ include_once "connection.php";
             <section class="add-task">
                 <h2>Adicionar Nova Tarefa</h2>
 
-                <form action="add-task.php" method="post" name="add-task" id="add-task">
+                <form action="add-task.php" method="post" name="add-task" id="add-task" >
                     <div id="add-task-form">
                         <div class="form-group">
                             <label for="task-name">Nome da Tarefa:</label>
-                            <input type="text" id="task-name" name="task-name" required autocomplete="false"/>
+                            <input type="text" id="task-name" name="task-name" required autocomplete="false" oninput="maxTitleLength(this)"/>
                         </div>
                         <div class="form-group">
                             <label for="due-date">Data de Vencimento:</label>
@@ -45,7 +45,7 @@ include_once "connection.php";
                             <label for="priority">Prioridade:</label>
                             <div class="radio-button-priority">
                                 <div class="radio-button-box">
-                                    <input type="radio" name="priority" id="priority-low" value="1"/>
+                                    <input type="radio" name="priority" id="priority-low" value="1" />
                                     <label for="priority-low">Baixa</label>
                                 </div>
                                 <div class="radio-button-box">
@@ -59,7 +59,7 @@ include_once "connection.php";
                             </div>
                             <div class="form-group">
                                 <label for="description">Descrição:</label>
-                                <textarea id="description" name="description" rows="4" autocomplete="false"></textarea>
+                                <textarea id="description" name="description" rows="4" autocomplete="false" oninput="maxDescriptionLength(this)"></textarea>
                             </div>
                         </div>
                         <input type="submit" value="Criar nova tarefa" name="submit" id="submit">
@@ -84,37 +84,10 @@ include_once "connection.php";
                     }
 
                 }
-
                 ?>
-
             </section>
         </main>
         <footer>&copy; 2023 Gerenciador de Tarefas</footer>
-        <script>
-            console.log("script")
-            document.addEventListener("DOMContentLoaded", function () {
-                console.log("DOM")
-                const form = document.getElementById("add-task")
-                console.log(form)
-                const submitButton = document.getElementById("submit-button")
-                const radioButtonValues = document.getElementsByName("priority")
-                form.addEventListener("submit", function (event) {
-                    let radioButtonFlag = false
-                    for (radioButton in radioButtonValues) {
-                        if (radioButtonValues[radioButton].checked) {
-                            radioButtonFlag = true
-                        }
-                        console.log(radioButtonFlag)
-                    }
-                    if (!radioButtonFlag) {
-                        alert("Selecione uma prioridade")
-                        event.preventDefault()
-                    }
-                })
-
-            })
-
-        </script>
-        <!-- <script src="js/add-task.js"></script> -->
+        <script src="js/task.js"></script>
     </body>
 </html>
